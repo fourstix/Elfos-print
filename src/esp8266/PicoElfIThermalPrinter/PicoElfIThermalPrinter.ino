@@ -667,7 +667,7 @@ void printHelpText() {
   printer.println(F("Printer Commands:"));
   printer.boldOff();
   printer.println(F("ESC @ - wake and go online"));
-  printer.println(F("ESC ! - default to normal text"));
+  printer.println(F("ESC ! - default text style"));
   printer.boldOn();
   printer.println(F("ESC e - toggle bold"));
   printer.boldOff(); 
