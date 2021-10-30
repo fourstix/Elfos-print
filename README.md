@@ -302,6 +302,7 @@ Printer Command codes
     <td >print help text</td>
   </tr>   
 </table>
+
 **Note:** 
 ESC represents the ASCII escape code, hexadecimal value *0x1B*, decimal value *27*.
 
@@ -318,7 +319,7 @@ Repository Contents
   * graphics.asm -- Command to send data from an image file to the printer.
   * sprint.asm -- Command to send a text string to the printer.
   * vprint.asm -- Command to send the contents of the Video Buffer to the printer as image data.
-* **/src/asm/esp8266/PicoElfIThermalPrinter/**  -- Source files for NodeMCU ESP8266 microcomputer to drive the printer.  
+* **/src/asm/esp8266/PicoElfIThermalPrinter/**  -- Source file for NodeMCU ESP8266 microcomputer to interface with the Pico/Elf I2C I/O board and to drive the thermal printer via serial communication.  
   * PicoElfIThermalPrinter.ino -- NodeMCU ESP8266 printer driver.
 * **/bin/** -- Binary files for Elf/OS printer commands.
 * **/lbr/**  -- Library file for Elf/OS (Unpack with Elf/OS lbr command)
@@ -330,9 +331,10 @@ Repository Contents
   * PicoElfI2C.zip -- KiCad5 project files for Pico/Elf I2C I/O Board.
   * PicoElfI2C-gerbers.zip -- Gerber files for Pico/Elf I2C I/O Board.
   * PicoElfI2C.pdf -- Schematic file for Pico/Elf I2C I/O Board.
-* **/utils/asm/**  -- Asm/02 assembler used to assemble the programs.  Please check the [rileym65/Asm-02](https://github.com/rileym65/Asm-02) repository on GitHub for the latest version of Asm/02.
+* **/utils/asm/**  -- Asm/02 assembler used to assemble the programs.  
     * asm02.exe - Windows 10 executable version of the Asm/02 assembler.
     * asm02.doc - Asm/02 documentation.  
+    Please check the [rileym65/Asm-02](https://github.com/rileym65/Asm-02) repository on GitHub for the latest version of Asm/02.
 
 License Information
 -------------------
