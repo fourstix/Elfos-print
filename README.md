@@ -35,17 +35,17 @@ I/O Connections
   <tr align="center">
     <td>+5v</td>
     <td>+5v</td>
-    <td>&nbsp;</td>
+    <td>Vcc</td>
   </tr>
   <tr align="center">
     <td>GND</td>
     <td>GND</td>
-    <td>&nbsp;</td>
+    <td>Ground</td>
   </tr>
   <tr align="center">
     <td>RST</td>
     <td>/RST</td>
-    <td>&nbsp;</td>
+    <td>Reset</td>
   </tr>
   <tr align="center">
     <td>3.3v</td>
@@ -70,12 +70,12 @@ I/O Connections
   <tr align="center">
     <td>D4</td>
     <td>EF</td>
-    <td>&nbsp;</td>
+    <td>External Flag</td>
   </tr>
   <tr align="center">
     <td>D5</td>
     <td>DOUT</td>
-    <td>&nbsp;</td>
+    <td>Data Output</td>
   </tr>
   <tr align="center">
     <td>D6</td>
@@ -93,23 +93,34 @@ I/O Connections
     <td>Printer Black</td>
   </tr>
   <tr align="center">
-    <td>&nbsp;</td>
-    <td>/DIN</td>
     <td>(Not Used)</td>
+    <td>/DIN</td>
+    <td>Data Input</td>
   </tr>
 </table>
 
+Schematic
+---------
+<table class="table table-hover table-striped table-bordered">
+<tr align="center">
+ <td ><img src="https://github.com/fourstix/Elfos-print/blob/main/pics/PicoElfI2C-schematic.jpg"></td>
+</tr>
+<tr align="center">
+  <td >Pico/Elf I2C I/O board hardware schematic</td>
+</tr>
+</table>
+
 Examples
----------------------
+---------
 Here are some examples running printer commands on the Pico/Elf v2 Hardware
 with the Pico/Elf I2C I/O board.  These examples were compiled with the [RcAsm 1802 Assmbler](https://github.com/rileym65/RcAsm).  Documentation for RcAsm can be found at [Elf-Emulation.com/RcAsm](http://www.elf-emulation.com/rcasm.html).
 
 <table class="table table-hover table-striped table-bordered">
   <tr align="center">
-   <td colspan="2"><img src="https://github.com/fourstix/Elfos-print/blob/main/pics/PicoElfI2C-schematic.jpg"></td>
+   <td colspan="2"><img src="https://github.com/fourstix/Elfos-print/blob/main/pics/PicoElfprt-setup.jpg"></td>
   </tr>
   <tr align="center">
-    <td colspan="2">Pico/Elf v2, Pico/Elf I2C I/O board, NodeMCU ESP2866 and Thermal Printer</td>
+    <td colspan="2">Pico/Elf v2, Pico/Elf I2C I/O board, NodeMCU ESP2866 and Adafruit Mini Thermal Printer</td>
   </tr>
   <tr align="center">
    <td><img src="https://github.com/fourstix/Elfos-print/blob/main/pics/PicoElfI2C-board.jpg"></td>
@@ -126,12 +137,6 @@ with the Pico/Elf I2C I/O board.  These examples were compiled with the [RcAsm 1
   <tr align="center">
     <td>Close up of printer showing text printed using the print command.</td>
     <td>Close up of printer showing image printed with the graphics command.</td>
-  </tr>
-  <tr align="center">
-   <td colspan="2"><img src="https://github.com/fourstix/Elfos-print/blob/main/pics/PicoElfI2C-schematic.jpg"></td>
-  </tr>
-  <tr align="center">
-    <td colspan="2">Pico/Elf I2C I/O board hardware schematic</td>
   </tr>
 </table>
 
@@ -328,6 +333,7 @@ Repository Contents
 * **/utils/asm/**  -- Asm/02 assembler used to assemble the programs.  Please check the [rileym65/Asm-02](https://github.com/rileym65/Asm-02) repository on GitHub for the latest version of Asm/02.
     * asm02.exe - Windows 10 executable version of the Asm/02 assembler.
     * asm02.doc - Asm/02 documentation.  
+
 License Information
 -------------------
 
