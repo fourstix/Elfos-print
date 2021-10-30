@@ -113,7 +113,8 @@ Schematic
 Examples
 ---------
 Here are some examples running printer commands on the Pico/Elf v2 Hardware
-with the Pico/Elf I2C I/O board.  These examples were compiled with the [RcAsm 1802 Assmbler](https://github.com/rileym65/RcAsm).  Documentation for RcAsm can be found at [Elf-Emulation.com/RcAsm](http://www.elf-emulation.com/rcasm.html).
+with the Pico/Elf I2C I/O board.  These examples were compiled with the [Asm/02 1802 Assmbler](https://github.com/rileym65/Asm-02) available on GitHub.
+
 
 <table class="table table-hover table-striped table-bordered">
   <tr align="center">
@@ -349,7 +350,7 @@ Any company, product, or services names may be trademarks or services marks of o
 
 All libraries used in this code are copyright their respective authors.
 
-This code is based on a Elf/OS code libraries written by Mike Riley and assembled with the RcAsm assembler also written by Mike Riley and use the Adafruit Thermal Printer library written by Limor Fried/Ladyada for Adafruit Industries, with contributions from the open source community. 
+This code is based on a Elf/OS code libraries written by Mike Riley and assembled with the Asm/02 assembler also written by Mike Riley and use the Adafruit Thermal Printer library written by Limor Fried/Ladyada for Adafruit Industries, with contributions from the open source community. 
 
 Elf/OS 
 Copyright (c) 2004-2021 by Mike Riley
