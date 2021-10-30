@@ -9,7 +9,7 @@ The printer commands were written to run on a [Pico/Elf v2 microcomputer](http:/
 Printer Hardware
 ----------------
 
-The printer used was the [Adafruit Mini Thermal Receipt Printer](https://www.adafruit.com/product/600). Adafruit has published a nice library for this printer available on GitHub at [adafruit/Adafruit-Thermal-Printer-Library](https://github.com/adafruit/Adafruit-Thermal-Printer-Library). This library was written by Limor Fried/Ladyada for Adafruit Industries, with contributions from the open source community. 
+The printer used was the [Adafruit Mini Thermal Receipt Printer](https://www.adafruit.com/product/600). Adafruit has published a nice library for this printer on GitHub at [adafruit/Adafruit-Thermal-Printer-Library](https://github.com/adafruit/Adafruit-Thermal-Printer-Library). This library was written by Limor Fried/Ladyada for Adafruit Industries, with contributions from the open source community. 
 
  The processor used was a [NodeMCU ESP8266](https://randomnerdtutorials.com/esp8266-pinout-reference-gpios/), but the printer server code could be modified to work for almost any Arduino or Raspberry Pi microprocessor.  Random Nerd Tutorials has lot of good information on the [ESP8266 microprocessors](https://randomnerdtutorials.com/projects-esp8266/) available.
 
@@ -106,7 +106,7 @@ with the Pico/Elf I2C I/O board.  These examples were compiled with the [RcAsm 1
 
 <table class="table table-hover table-striped table-bordered">
   <tr align="center">
-   <td colspan="2"><img src="https://github.com/fourstix/Elfos-print/blob/main/pics/PicoElfPrt-setup.jpg"></td>
+   <td colspan="2"><img src="https://github.com/fourstix/Elfos-print/blob/main/pics/PicoElfI2C-schematic.jpg"></td>
   </tr>
   <tr align="center">
     <td colspan="2">Pico/Elf v2, Pico/Elf I2C I/O board, NodeMCU ESP2866 and Thermal Printer</td>
@@ -120,15 +120,15 @@ with the Pico/Elf I2C I/O board.  These examples were compiled with the [RcAsm 1
     <td>Pixie Video GLCD display and print out of Video Buffer using vprint command.</td>
   </tr>  
   <tr align="center">
-     <td colspan="2"><img src="https://github.com/fourstix/PicoElfPixieVideoGLCDV2/blob/main/pics/schematic.jpg"></td>
-  </tr>
-  <tr align="center">
    <td><img src="https://github.com/fourstix/Elfos-print/blob/main/pics/PicoElfPrt-text.jpg"></td>
    <td><img src="https://github.com/fourstix/Elfos-print/blob/main/pics/PicoElfPrt-graphics.jpg"></td>
   </tr>
   <tr align="center">
     <td>Close up of printer showing text printed using the print command.</td>
     <td>Close up of printer showing image printed with the graphics command.</td>
+  </tr>
+  <tr align="center">
+   <td colspan="2"><img src="https://github.com/fourstix/Elfos-print/blob/main/pics/PicoElfI2C-schematic.jpg"></td>
   </tr>
   <tr align="center">
     <td colspan="2">Pico/Elf I2C I/O board hardware schematic</td>
@@ -300,6 +300,34 @@ Printer Command codes
 **Note:** 
 ESC represents the ASCII escape code, hexadecimal value *0x1B*, decimal value *27*.
 
+Repository Contents
+-------------------
+* **/src/asm/**  -- Source files for assembling Elf/OS printer commands.
+  * asm.bat - Windows batch file to assemble source file with Asm/02 to create binary file. Use the command *asm xxx.asm* to assemble the xxx.asm file.
+  * ops.inc - Opcode definitions for Asm/02.
+  * bios.inc - Bios definitions from Elf/OS.
+  * kernel.inc - Kernel definitions from Elf/OS.
+  * lprt.asm -- Command to load the printer driver into heap memory.
+  * qprt.asm -- Command to query the printer and show its status.
+  * print.asm -- Command to send a text file to the printer.
+  * graphics.asm -- Command to send data from an image file to the printer.
+  * sprint.asm -- Command to send a text string to the printer.
+  * vprint.asm -- Command to send the contents of the Video Buffer to the printer as image data.
+* **/src/asm/esp8266/PicoElfIThermalPrinter/**  -- Source files for NodeMCU ESP8266 microcomputer to drive the printer.  
+  * PicoElfIThermalPrinter.ino -- NodeMCU ESP8266 printer driver.
+* **/bin/** -- Binary files for Elf/OS printer commands.
+* **/lbr/**  -- Library file for Elf/OS (Unpack with Elf/OS lbr command)
+  * printer.lbr - Library file for Elf/OS print commands.
+* **/hlp/**  -- Help file for Elf/OS. (Used with Elf/OS help command)
+  * print.lbr - Help file for Elf/OS commands. (Do not unpack with lbr, instead copy into /hlp directory.)   
+* **/pics/** -- example pictures for readme
+* **/brd/** -- Printed Circuit Board layout for Pico/Elf I2C I/O Board.
+  * PicoElfI2C.zip -- KiCad5 project files for Pico/Elf I2C I/O Board.
+  * PicoElfI2C-gerbers.zip -- Gerber files for Pico/Elf I2C I/O Board.
+  * PicoElfI2C.pdf -- Schematic file for Pico/Elf I2C I/O Board.
+* **/utils/asm/**  -- Asm/02 assembler used to assemble the programs.  Please check the [rileym65/Asm-02](https://github.com/rileym65/Asm-02) repository on GitHub for the latest version of Asm/02.
+    * asm02.exe - Windows 10 executable version of the Asm/02 assembler.
+    * asm02.doc - Asm/02 documentation.  
 License Information
 -------------------
 
