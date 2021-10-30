@@ -1,5 +1,5 @@
 # Elfos-print
-Printer driver functions for the Elf/OS.
+Printer driver functions for the Elf/OS using an Adafruit Thermal Printer.
 
 Platform  
 --------
@@ -9,11 +9,95 @@ The printer commands were written to run on a [Pico/Elf v2 microcomputer](http:/
 Printer Hardware
 ----------------
 
-The printer used was the [Adafruit Mini Thermal Receipt Printer](https://www.adafruit.com/product/600). Adafruit has published a nice library for this printer available on GitHub at [adafruit/Adafruit-Thermal-Printer-Library](https://github.com/adafruit/Adafruit-Thermal-Printer-Library). The processor used was a [NodeMCU ESP8266](https://randomnerdtutorials.com/esp8266-pinout-reference-gpios/), but the printer server code could be modified to work for almost any Arduino or Raspberry Pi microprocessor.  Random Nerd Tutorials has lot of good information on the [ESP8266 microprocessors](https://randomnerdtutorials.com/projects-esp8266/) available.
+The printer used was the [Adafruit Mini Thermal Receipt Printer](https://www.adafruit.com/product/600). Adafruit has published a nice library for this printer available on GitHub at [adafruit/Adafruit-Thermal-Printer-Library](https://github.com/adafruit/Adafruit-Thermal-Printer-Library). This library was written by Limor Fried/Ladyada for Adafruit Industries, with contributions from the open source community. 
+
+ The processor used was a [NodeMCU ESP8266](https://randomnerdtutorials.com/esp8266-pinout-reference-gpios/), but the printer server code could be modified to work for almost any Arduino or Raspberry Pi microprocessor.  Random Nerd Tutorials has lot of good information on the [ESP8266 microprocessors](https://randomnerdtutorials.com/projects-esp8266/) available.
 
 Pico/Elf I2C I/O Board
 ----------------------
-A custom [Pico/Elf I2C I/O board](https://github.com/fourstix/Elfos-print/blob/main/brd/PicoElfI2C.pdf) is used to communicate from the Pico/Elf v2 1802 microprocessor bus and the NodeMCU microprocessor that drives the Thermal Printer via serial communication.  The Elf/OS reads and writes to Port 5 and monitors the /EF3 line to communicate data to the Pico/Elf I2C I/O board.  An MCP23017 GPIO extender reads or write data to the Pico/Elf bus.  The printer microprocessor uses I2C to communicate with the MCP23017 and serial communication to send data to the Thermal Printer.  The Pico/Elf I2C I/O board can buffer the I/O levels to 3.3v or 5v, and the /EF line and Port number are selectable via jumper settings.  The design is based on the Pico/Elf v2 hardware by Mike Riley. Information about the Pico/Elf v2 is available at [Elf-Emulation.com](http://www.elf-emulation.com/).  [Gerber files](https://github.com/fourstix/Elfos-print/blob/main/brd/PicoElfI2C-gerbers.zip) and [Kicad project files](https://github.com/fourstix/Elfos-print/blob/main/brd/PicoElfI2C.zip) are available for this board.
+A custom [Pico/Elf I2C I/O board](https://github.com/fourstix/Elfos-print/blob/main/brd/PicoElfI2C.pdf) is used to communicate from the Pico/Elf v2 1802 microprocessor bus and the NodeMCU microprocessor that drives the Thermal Printer via serial communication.  The Elf/OS reads and writes to Port 5 and monitors the /EF3 line to communicate data to the Pico/Elf I2C I/O board.  An MCP23017 GPIO extender reads or write data to the Pico/Elf bus.  
+
+The printer microprocessor uses I2C to communicate with the MCP23017 and serial communication to send data to the Thermal Printer.  The Pico/Elf I2C I/O board can buffer the I/O levels to 3.3v or 5v, and the /EF line and Port number are selectable via jumper settings.  The design is based on the Pico/Elf v2 hardware by Mike Riley. Information about the Pico/Elf v2 is available at [Elf-Emulation.com](http://www.elf-emulation.com/).  [Gerber files](https://github.com/fourstix/Elfos-print/blob/main/brd/PicoElfI2C-gerbers.zip) and [Kicad project files](https://github.com/fourstix/Elfos-print/blob/main/brd/PicoElfI2C.zip) are available for this board.
+
+I/O Connections
+---------------
+<table class="table table-hover table-striped table-bordered">
+  <tr align="center">
+    <th>ESP2866</th>
+    <th>I/O Board</th>
+    <th>&nbsp;</th>
+  </tr>
+  <tr align="center">
+    <th>Pin</th>
+    <th>Pin</th>
+    <th>Notes</th>
+  </tr>
+  <tr align="center">
+    <td>+5v</td>
+    <td>+5v</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr align="center">
+    <td>GND</td>
+    <td>GND</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr align="center">
+    <td>RST</td>
+    <td>/RST</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr align="center">
+    <td>3.3v</td>
+    <td>VBus</td>
+    <td>Qwiic Red</td>
+  </tr>
+  <tr align="center">
+    <td>GND</td>
+    <td>GND</td>
+    <td>Qwiic Black</td>
+  </tr>
+  <tr align="center">
+    <td>D1</td>
+    <td>SCL</td>
+    <td>Qwiic Yellow</td>
+  </tr>
+  <tr align="center">
+    <td>D2</td>
+    <td>SDA</td>
+    <td>Qwiic Blue</td>
+  </tr>
+  <tr align="center">
+    <td>D4</td>
+    <td>EF</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr align="center">
+    <td>D5</td>
+    <td>DOUT</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr align="center">
+    <td>D6</td>
+    <td>RX1</td>
+    <td>Printer Green</td>
+  </tr>
+  <tr align="center">
+    <td>D7</td>
+    <td>TX1</td>
+    <td>Printer Yellow</td>
+  </tr>
+  <tr align="center">
+    <td>GND</td>
+    <td>GND</td>
+    <td>Printer Black</td>
+  </tr>
+  <tr align="center">
+    <td>&nbsp;</td>
+    <td>/DIN</td>
+    <td>(Not Used)</td>
+  </tr>
+</table>
 
 Examples
 ---------------------
@@ -22,7 +106,7 @@ with the Pico/Elf I2C I/O board.  These examples were compiled with the [RcAsm 1
 
 <table class="table table-hover table-striped table-bordered">
   <tr align="center">
-   <td colspan="2"><img src="https://github.com/fourstix/Elfos-print/blob/main/pics/PicoElfI2C-schematic.jpg"></td>
+   <td colspan="2"><img src="https://github.com/fourstix/Elfos-print/blob/main/pics/setup.jpg"></td>
   </tr>
   <tr align="center">
     <td colspan="2">Pico/Elf v2, Pico/Elf I2C I/O board, NodeMCU ESP2866 and Thermal Printer</td>
@@ -211,6 +295,8 @@ Printer Command codes
     <td >print help text</td>
   </tr>   
 </table>
+**Note:** 
+ESC represents the ASCII escape code, hexadecimal value *0x1B*, decimal value *27*.
 
 License Information
 -------------------
@@ -225,7 +311,7 @@ Any company, product, or services names may be trademarks or services marks of o
 
 All libraries used in this code are copyright their respective authors.
 
-This code is based on a Elf/OS code libraries written by Mike Riley and assembled with the RcAsm assembler also written by Mike Riley.
+This code is based on a Elf/OS code libraries written by Mike Riley and assembled with the RcAsm assembler also written by Mike Riley and use the Adafruit Thermal Printer library written by Limor Fried/Ladyada for Adafruit Industries, with contributions from the open source community. 
 
 Elf/OS 
 Copyright (c) 2004-2021 by Mike Riley
@@ -235,7 +321,9 @@ Copyright (c) 2004-2021 by Mike Riley
 
 The Pico/Elf Microcomputer Hardware
 Copyright (c) 2020-2021 by Mike Riley
- 
+
+The Adafruit Thermal Printer Arduino Library
+Copyright (c) 2011-2021 by Adafruit Industries 
  
 Many thanks to the original authors for making their designs and code available as open source.
  
