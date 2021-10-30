@@ -30,7 +30,7 @@ I/O Connections
   <tr align="center">
     <th>Pin</th>
     <th>Pin</th>
-    <th>Notes</th>
+    <th>Description</th>
   </tr>
   <tr align="center">
     <td>+5v</td>
@@ -314,12 +314,12 @@ Repository Contents
   * ops.inc - Opcode definitions for Asm/02.
   * bios.inc - Bios definitions from Elf/OS.
   * kernel.inc - Kernel definitions from Elf/OS.
-  * lprt.asm -- Command to load the printer driver into heap memory.
-  * qprt.asm -- Command to query the printer and show its status.
-  * print.asm -- Command to send a text file to the printer.
-  * graphics.asm -- Command to send data from an image file to the printer.
-  * sprint.asm -- Command to send a text string to the printer.
-  * vprint.asm -- Command to send the contents of the Video Buffer to the printer as image data.
+  * lprt.asm -- Load the printer driver into heap memory.
+  * qprt.asm -- Query the printer and show its status.
+  * print.asm -- Send a text file to the printer.
+  * graphics.asm -- Send data from an image file to the printer.
+  * sprint.asm -- Send a text string to the printer.
+  * vprint.asm -- Send the contents of the Video Buffer to the printer as image data.
 * **/src/asm/esp8266/PicoElfIThermalPrinter/**  -- Source file for NodeMCU ESP8266 microcomputer to interface with the Pico/Elf I2C I/O board and to drive the thermal printer via serial communication.  
   * PicoElfIThermalPrinter.ino -- NodeMCU ESP8266 printer driver.
 * **/bin/** -- Binary files for Elf/OS printer commands.
