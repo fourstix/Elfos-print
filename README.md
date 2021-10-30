@@ -4,17 +4,16 @@ Printer driver functions for the Elf/OS.
 Platform  
 --------
 
-The printer commands were written to run on a [Pico/Elf](http://www.elf-emulation.com/picoelf.html).
-A lot of information and software for the Pico/Elf can be found on the [Elf-Emulation](http://www.elf-emulation.com/) website and in the [COSMAC ELF Group](https://groups.io/g/cosmacelf) at groups.io. The Elf/OS printer commands were all assembled into 1802 binary files using the [Asm/02 1802 Assembler](https://github.com/rileym65/Asm-02) by Mike Riley.
+The printer commands were written to run on a [Pico/Elf v2 microcomputer](http://www.elf-emulation.com/picoelf.html). A lot of information and software for the Pico/Elf v2 microcomputer can be found on the [Elf-Emulation](http://www.elf-emulation.com/) website and in the [COSMAC ELF Group](https://groups.io/g/cosmacelf) at groups.io. The Elf/OS printer commands were all assembled into 1802 binary files using the [Asm/02 1802 Assembler](https://github.com/rileym65/Asm-02) by Mike Riley.
 
-Printer  
---------
+Printer Hardware
+----------------
 
 The printer used was the [Adafruit Mini Thermal Receipt Printer](https://www.adafruit.com/product/600). Adafruit has published a nice library for this printer available on GitHub at [adafruit/Adafruit-Thermal-Printer-Library](https://github.com/adafruit/Adafruit-Thermal-Printer-Library). The processor used was a [NodeMCU ESP8266](https://randomnerdtutorials.com/esp8266-pinout-reference-gpios/), but the printer server code could be modified to work for almost any Arduino or Raspberry Pi microprocessor.  Random Nerd Tutorials has lot of good information on the [ESP8266 microprocessors](https://randomnerdtutorials.com/projects-esp8266/) available.
 
 Pico/Elf I2C I/O Board
 ----------------------
-A custom [Pico/Elf I2C](https://github.com/fourstix/Elfos-print/blob/main/brd/PicoElfI2C.pdf) board was used to communicate from the Pico/Elf v2 1802 microprocessor bus and the NodeMCU microprocessor that drives the Thermal Printer via serial communication.  The Elf/OS reads and writes to Port 5 and monitors the /EF3 line to communicate data to the Pico/Elf I2C I/O board.  An MCP23017 GPIO extender reads or write data to the Pico/Elf bus.  The printer microprocessor uses I2C to communicate with the MCP23017 and serial communication to send data to the Thermal Printer.  The Pico/Elf I2C board can buffer the I/O levels to 3.3v or 5v, and the /EF line and Port are selectable via jumper settings.  The design is based on the Pico/Elf v2 hardware by Mike Riley. Information about the Pico/Elf v2 is available at [Elf-Emulation.com](http://www.elf-emulation.com/).  [Gerber files]() and [Kicad files]() are available for the board.
+A custom [Pico/Elf I2C I/O board](https://github.com/fourstix/Elfos-print/blob/main/brd/PicoElfI2C.pdf) is used to communicate from the Pico/Elf v2 1802 microprocessor bus and the NodeMCU microprocessor that drives the Thermal Printer via serial communication.  The Elf/OS reads and writes to Port 5 and monitors the /EF3 line to communicate data to the Pico/Elf I2C I/O board.  An MCP23017 GPIO extender reads or write data to the Pico/Elf bus.  The printer microprocessor uses I2C to communicate with the MCP23017 and serial communication to send data to the Thermal Printer.  The Pico/Elf I2C I/O board can buffer the I/O levels to 3.3v or 5v, and the /EF line and Port number are selectable via jumper settings.  The design is based on the Pico/Elf v2 hardware by Mike Riley. Information about the Pico/Elf v2 is available at [Elf-Emulation.com](http://www.elf-emulation.com/).  [Gerber files](https://github.com/fourstix/Elfos-print/blob/main/brd/PicoElfI2C-gerbers.zip) and [Kicad project files](https://github.com/fourstix/Elfos-print/blob/main/brd/PicoElfI2C.zip) are available for this board.
 
 Examples
 ---------------------
@@ -26,7 +25,7 @@ with the Pico/Elf I2C I/O board.  These examples were compiled with the [RcAsm 1
    <td colspan="2"><img src="https://github.com/fourstix/Elfos-print/blob/main/pics/PicoElfI2C-schematic.jpg"></td>
   </tr>
   <tr align="center">
-    <td colspan="2">Schematic for Pico/Elf I2C I/O board</td>
+    <td colspan="2">Pico/Elf v2, Pico/Elf I2C I/O board, NodeMCU ESP2866 and Thermal Printer</td>
   </tr>
   <tr align="center">
    <td><img src="https://github.com/fourstix/PicoElfPixieVideoGLCDV2/blob/main/pics/tvclock.jpg"></td>
@@ -43,13 +42,175 @@ with the Pico/Elf I2C I/O board.  These examples were compiled with the [RcAsm 1
      <td colspan="2">Pico/Elf Pixie Video GLCD version 2 Hardware Schematic</td>
   </tr>
   <tr align="center">
-     <td colspan="2"><img src="https://github.com/fourstix/PicoElfPixieVideoGLCDV2/blob/main/pics/all_three.jpg"></td>
+   <td colspan="2"><img src="https://github.com/fourstix/Elfos-print/blob/main/pics/PicoElfI2C-schematic.jpg"></td>
   </tr>
   <tr align="center">
-     <td colspan="2">Pico/Elf v2 running with an STG RTC/NVR card and a Pixie Video GLCD Card connected by an IDE cable.</td>
+    <td colspan="2">Pico/Elf I2C I/O board hardware schematic</td>
   </tr>
 </table>
 
+Elf/OS Printer Commands
+-------------------------------------
+
+## lprt
+**Usage:** lprt [-u]    
+Load the printer driver into heap memory. The option -u will unload the printer driver and 
+deallocate the memory.
+ 
+**Note:** 
+This command should be issued to load the printer driver before any other print commands.
+
+## qprt 
+**Usage:** qprt [-v|-s|-w]    
+Query the printer and show its status.  The option -v will show a verbose message.  The option -s will sleep the printer offline and the option -w will wake the printer online.
+
+## print
+**Usage:** print *filename*    
+Send the text file named *filename* to the printer. The file may contain ASCII escape character codes and printer command codes.
+
+## graphics
+**Usage:** graphics *filename*    
+Print the data in the image file named *filename* as a graphic image. The file can be a 256 byte 32x64 image file or a 512 byte 64x64 image file.
+
+## sprint
+**Usage:** sprint *text*    
+Send a text string to the printer. The string may contain ASCII escape character codes and printer command codes.
+
+**Note:** 
+The command *sprint \e?* will print help text on the printer.
+
+## vprint
+**Usage:** vprint   
+Print the video buffer. Send the data in the video buffer to the printer as a graphic image.
+
+**Note:** 
+Requires the [Pixie Video functions](https://github.com/fourstix/Elfos-video) for 1861 Pixie Video Display and the 1802 Pico/Elf v2 microcomputer.
+
+Supported ASCII Escape Character codes
+--------------------------------------
+<table class="table table-hover table-striped table-bordered">
+  <tr align="center">
+   <th >String</th>
+   <th >ASCII</th>
+   <th >Name</th>
+  </tr>
+  <tr align="center">
+   <td >\f</td>
+   <td >FF</td>
+   <td >Form Feed</td>
+  </tr>
+  <tr align="center">
+   <td >\n</td>
+   <td >LF</td>
+   <td >Line Feed</td>
+  </tr>
+  <tr align="center">
+   <td >\r</td>
+   <td >CR</td>
+   <td >Carriage Return</td>
+  </tr>
+  <tr align="center">
+   <td >\t</td>
+   <td >TAB</td>
+   <td >Horizontal Tab</td>
+  </tr>
+  <tr align="center">
+   <td >\v</td>
+   <td >VT</td>
+   <td >Vertical Tab</td>
+  </tr>
+  <tr align="center">
+   <td >\e</td>
+   <td >ESC</td>
+   <td >Escape</td>
+  </tr>
+  <tr align="center">
+   <td >\\</td>
+   <td >BS</td>
+   <td >Backslash</td>
+  </tr>
+</table>
+
+Printer Command codes
+---------------------
+<table class="table table-hover table-striped table-bordered">
+  <tr align="center">
+    <th >String</th>
+    <th >Command</th>
+  </tr>
+  <tr align="center">
+    <td >ESC @</td>
+    <td >wake and go online</td>
+  </tr>   
+  <tr align="center">
+    <td >ESC !</td>
+    <td >default text style</td>
+  </tr>   
+  <tr align="center">
+    <td >ESC e</td>
+    <td >toggle bold text</td>
+  </tr>   
+  <tr align="center">
+    <td >ESC i</td>
+    <td >toggle inverse text</td>
+  </tr>   
+  <tr align="center">
+    <td >ESC u</td>
+    <td >toggle underline text</td>
+  </tr>   
+  <tr align="center">
+    <td >ESC 1</td>
+    <td >single space lines</td>
+  </tr>   
+  <tr align="center">
+    <td >ESC 2</td>
+    <td >double space lines</td>
+  </tr>   
+  <tr align="center">
+    <td >ESC s</td>
+    <td >switch font style</td>
+  </tr>   
+  <tr align="center">
+    <td >ESC l (ESC L)</td>
+    <td >left justify</td>
+  </tr>   
+  <tr align="center">
+    <td >ESC c</td>
+    <td >center text</td>
+  </tr>   
+  <tr align="center">
+    <td >ESC r</td>
+    <td >right justify</td>
+  </tr>   
+  <tr align="center">
+    <td >ESC n</td>
+    <td >normal (small) text</td>
+  </tr>   
+  <tr align="center">
+    <td >Esc t</td>
+    <td >tall (medium) text</td>
+  </tr>   
+  <tr align="center">
+    <td >ESC w</td>
+    <td >wide (large) text</td>
+  </tr>   
+  <tr align="center">
+    <td >ESC # graphic[256]</td>
+    <td >print 32x64 image</td>
+  </tr>   
+  <tr align="center">
+    <td >ESC * graphic[512]</td>
+    <td >print 64x64 image</td>
+  </tr>   
+  <tr align="center">
+    <td >ESC =</td>
+    <td >go offline and sleep</td>
+  </tr>   
+  <tr align="center">
+    <td >ESC ?</td>
+    <td >print help text</td>
+  </tr>   
+</table>
 
 License Information
 -------------------
