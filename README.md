@@ -99,6 +99,68 @@ I/O Connections
   </tr>
 </table>
 
+Pico/Elf v2 1802 Ports
+----------------------
+<table class="table table-hover table-striped table-bordered">
+  <tr align="center">
+    <th>Port Number</th>
+    <th>Purpose</th>
+  </tr>
+  <tr align="center">
+    <td>Port 1</td>
+    <td>Pixie Video</td>
+  </tr>
+  <tr align="center">
+    <td>Port 2</td>
+    <td>Pico/Elf IDE</td>
+  </tr>
+  <tr align="center">
+    <td>Port 3</td>
+    <td>Pico/Elf IDE</td>
+  </tr>
+  <tr align="center">
+    <td>Port 4</td>
+    <td>Data I/O</td>
+  </tr>
+  <tr align="center">
+    <td>Port 5</td>
+    <td>Printer I/O</td>
+  </tr>  
+  <tr align="center">
+    <td>Port 6</td>
+    <td>RTC/NVR/UART</td>
+  </tr>   
+  <tr align="center">
+    <td>Port 7</td>
+    <td>RTC/NVR/UART</td>
+  </tr>   
+</table>
+
+Pico/Elf v2 1802 Flags
+----------------------
+<table class="table table-hover table-striped table-bordered">
+  <tr align="center">
+    <th>External Flag</th>
+    <th>Purpose</th>
+  </tr>
+  <tr align="center">
+    <td>/EF1</td>
+    <td>Pixie Video On/Off</td>
+  </tr>
+  <tr align="center">
+    <td>/EF2</td>
+    <td>Pico/Elf2 Software Serial I/O</td>
+  </tr> 
+  <tr align="center">
+    <td>/EF3</td>
+    <td>Printer Busy</td>
+  </tr>
+  <tr align="center">
+    <td>/EF4</td>
+    <td>Data Input</td>
+  </tr>
+</table>
+           
 Schematic
 ---------
 <table class="table table-hover table-striped table-bordered">
@@ -307,6 +369,39 @@ Printer Command codes
 **Note:** 
 ESC represents the ASCII escape code, hexadecimal value *0x1B*, decimal value *27*.
 
+Printer Status codes
+---------------------
+<table class="table table-hover table-striped table-bordered">
+  <tr align="center">
+    <th >Byte Value</th>
+    <th >Meaning</th>
+  </tr>
+  <tr align="center">
+    <td >00</td>
+    <td >Printer Ready</td>
+  </tr>
+  <tr align="center">
+    <td >21</td>
+    <td >Printer asleep offline</td>
+  </tr>  
+  <tr align="center">
+    <td >24</td>
+    <td >Printer Out of Paper</td>
+  </tr> 
+  <tr align="center">
+    <td >28</td>
+    <td >Printer Over Voltage</td>
+  </tr> 
+  <tr align="center">
+    <td >60</td>
+    <td >Printer Over Heated</td>
+  </tr> 
+  <tr align="center">
+    <td >Any Other</td>
+    <td >Printer Not Found</td>
+  </tr>     
+</table>
+  
 Repository Contents
 -------------------
 * **/src/asm/**  -- Source files for assembling Elf/OS printer commands.
