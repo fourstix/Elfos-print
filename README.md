@@ -106,27 +106,29 @@ with the Pico/Elf I2C I/O board.  These examples were compiled with the [RcAsm 1
 
 <table class="table table-hover table-striped table-bordered">
   <tr align="center">
-   <td colspan="2"><img src="https://github.com/fourstix/Elfos-print/blob/main/pics/setup.jpg"></td>
+   <td colspan="2"><img src="https://github.com/fourstix/Elfos-print/blob/main/pics/PicoElfPrt-setup.jpg"></td>
   </tr>
   <tr align="center">
     <td colspan="2">Pico/Elf v2, Pico/Elf I2C I/O board, NodeMCU ESP2866 and Thermal Printer</td>
   </tr>
   <tr align="center">
-   <td><img src="https://github.com/fourstix/PicoElfPixieVideoGLCDV2/blob/main/pics/tvclock.jpg"></td>
-   <td><img src="https://github.com/fourstix/PicoElfPixieVideoGLCDV2/blob/main/pics/port4out.jpg"></td>
+   <td><img src="https://github.com/fourstix/Elfos-print/blob/main/pics/PicoElfI2C-board.jpg"></td>
+   <td><img src="https://github.com/fourstix/Elfos-print/blob/main/pics/PicoElfPrt-vprint.jpg"></td>
   </tr>
   <tr align="center">
-    <td>Close up of 128x64 ST7920 GLCD display with 1802 Pico/Elf v2 running Tom Pittman's TV Clock program.</td>
-    <td>Close up of 128x64 ST7920 GLCD display displaying the hex value '0E' output to Port 4 by the 1802 Pico/Elf v2. Note that the LED is on indicating the Q-bit is true.</td>
+    <td>Close up of Pico/Elf I2C I/O Board</td>
+    <td>Pixie Video GLCD display and print out of Video Buffer using vprint command.</td>
   </tr>  
   <tr align="center">
      <td colspan="2"><img src="https://github.com/fourstix/PicoElfPixieVideoGLCDV2/blob/main/pics/schematic.jpg"></td>
   </tr>
   <tr align="center">
-     <td colspan="2">Pico/Elf Pixie Video GLCD version 2 Hardware Schematic</td>
+   <td><img src="https://github.com/fourstix/Elfos-print/blob/main/pics/PicoElfPrt-text.jpg"></td>
+   <td><img src="https://github.com/fourstix/Elfos-print/blob/main/pics/PicoElfPrt-graphics.jpg"></td>
   </tr>
   <tr align="center">
-   <td colspan="2"><img src="https://github.com/fourstix/Elfos-print/blob/main/pics/PicoElfI2C-schematic.jpg"></td>
+    <td>Close up of printer showing text printed using the print command.</td>
+    <td>Close up of printer showing image printed with the graphics command.</td>
   </tr>
   <tr align="center">
     <td colspan="2">Pico/Elf I2C I/O board hardware schematic</td>
